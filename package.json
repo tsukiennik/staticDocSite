@@ -1,0 +1,23 @@
+{
+  "name": "APISampleApp",
+  "version": "0.0.1",
+  "description": "Sample App for API using Nodes.js SDK",
+  "license": "ISC",
+  "dependencies": {
+    "JSONPath": "latest",
+    "fs-extra": "latest",
+    "js-beautify": "latest",
+    "phpdate-js": "latest",
+    "q": "^1.4.1",
+    "request": "latest",
+    "lodash": "^3.0.0",
+    "swig": "latest",
+    "node-static": "latest"
+  },
+  "maintainers": [
+    {
+      "name": "Tony Sukiennik",
+      "email": "tsukiennik@equinix.com"
+    }
+  ]
+}
