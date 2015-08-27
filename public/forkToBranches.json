@@ -1,0 +1,44 @@
+{
+	"1": {
+		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
+		"itemLabel": "Here is a Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the FIRST Topic we'll talk about..."
+	},
+	"2": {
+		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
+		"itemLabel": "Here is another Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the SECOND Topic we'll talk about..."
+	},
+	"3": {
+		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
+		"itemLabel": "Here is yet another Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the THIRD Topic we'll talk about..."
+	},
+	"4": {
+		"tip": "Click here for lesson {{index}}...",
+		"itemLabel": "Here is another important Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the FOURTH Topic we'll talk about..."
+	},
+	"5": {
+		"tip": "Click here for lesson {{index}}...",
+		"itemLabel": "Here is an optional Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the FIFTH Topic we'll talk about..."
+	},
+	"6": {
+		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
+		"itemLabel": "Here is another optional Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the SIXTH Topic we'll talk about..."
+	},
+	"7": {
+		"tip": "Click here for lesson {{index}}...",
+		"itemLabel": "Here is a summary Topic",
+		"href": "#lesson{{index}}",
+		"lessonLabel": "This is the DETAIL of the SEVENTH Topic we'll talk about..."
+	}
+}
