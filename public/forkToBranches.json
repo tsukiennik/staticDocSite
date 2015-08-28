@@ -1,44 +1,50 @@
 {
 	"1": {
-		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
-		"itemLabel": "Here is a Topic",
+		"tip": "Explore Executing the Test Script...",
+		"itemLabel": "Execute the Test Script on Fork Branching",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the FIRST Topic we'll talk about..."
+		"lessonLabel": "Details - Execute the Test Script on Fork Branching",
+		"references": [
+			{
+				"text": ".../tutorial/e0_testMyAPI_ForkBranching.sh",
+				"link": "https://github.com/equinix/gse-common/blob/master/rapierTestTutorial/rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh"
+			}
+		]
 	},
 	"2": {
-		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
-		"itemLabel": "Here is another Topic",
+		"tip": "Explore Executing Script Steps in Parallel...",
+		"itemLabel": "The Compound Step will trigger method 1 and method 2 in parallel",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the SECOND Topic we'll talk about..."
+		"lessonLabel": "Details - The Compound Step will trigger method 1 and method 2 in parallel"
 	},
 	"3": {
-		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
-		"itemLabel": "Here is yet another Topic",
+		"tip": "Explore Step Responses stored in the Data Pipeline...",
+		"itemLabel": "Response Bodies are stored in the Data Pipeline in the order in which they are received",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the THIRD Topic we'll talk about..."
+		"lessonLabel": "Details - Response Bodies are stored in the Data Pipeline in the order in which they are received"
 	},
 	"4": {
-		"tip": "Click here for lesson {{index}}...",
-		"itemLabel": "Here is another important Topic",
+		"tip": "Explore Extracting Variables from the Data Pipeline...",
+		"itemLabel": "Defined Fork Variables are extracted from the Data Pipeline",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the FOURTH Topic we'll talk about..."
+		"lessonLabel": "Detail - Defined Fork Variables are extracted from the Data Pipeline"
 	},
 	"5": {
-		"tip": "Click here for lesson {{index}}...",
-		"itemLabel": "Here is an optional Topic",
+		"tip": "Explore a Fork Branch NOT TAKEN...",
+		"itemLabel": "Fork Branch IS NOT EXECUTED as indicated by the Red Line",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the FIFTH Topic we'll talk about..."
+		"lessonLabel": "Detail - Fork Branch IS NOT EXECUTED"
 	},
 	"6": {
-		"tip": "This is a test of the emergency broadcast system \n  especially for Item {{index}}...",
-		"itemLabel": "Here is another optional Topic",
+		"tip": "Explore a Fork Branch that IS TAKEN......",
+		"itemLabel": "Fork Branch IS EXECUTED as indicated by the Green Line",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the SIXTH Topic we'll talk about..."
+		"lessonLabel": "Detail - Fork Branch IS EXECUTED"
 	},
 	"7": {
-		"tip": "Click here for lesson {{index}}...",
-		"itemLabel": "Here is a summary Topic",
+		"tip": "Explore Fork Branch Responses",
+		"itemLabel": "Fork Branchs will reflect their responses within the Data Pipeline",
 		"href": "#lesson{{index}}",
-		"lessonLabel": "This is the DETAIL of the SEVENTH Topic we'll talk about..."
+		"lessonLabel": "Detail - Fork Branchs will reflect their responses within the Data Pipeline"
 	}
 }

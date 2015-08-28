@@ -38,6 +38,10 @@ $(function() {
             $('#svg-main').find('svg').click(function(event) {
                 //alert(event.target);
             });
+            var activeSteps = [];
+            var lastHighlightedStep = null;
+            var stepIndex = -1;
+            var bStepHovered = false;
             $('#svg-main').find('ellipse').parent().each(function(step) {
                 var id = $(this).find("tspan");
                 if (id.size() === 1) {
@@ -47,22 +51,64 @@ $(function() {
                         this.setAttribute("title", tip);
                     }
                 }
-            });
-           $('#svg-main').find('ellipse').parent().click(function(event) {
-                event.stopPropagation();//fill: #f3f3f3
                 var ellipse = $(this).find("ellipse");
                 if (ellipse[0].style.fill === "rgb(243, 243, 243)") {
-                    var id = $(this).find("tspan");
-                    if (id.size() === 1) {
-                        var metadata = items[id.text()];
-                        if (metadata) {
-                            var itemLabel = metadata.itemLabel.replace("{{index}}", id.text());
-                            //alert("This will navigate to: " + itemLabel);
-                            document.location = "#item" + id.text();
-                        }
-                    }
+                    $(this).click(clickStepIcon);
+                    $(this).mouseenter(mouseenterStepIcon);
+                    $(this).mouseleave(mouseleaveStepIcon);
+                    activeSteps.push({ shape: ellipse[0], tip: items[id.text()].tip });
                 }
             });
+
+            function clickStepIcon(event) {
+                event.stopPropagation();//fill: #f3f3f3
+                var id = $(this).find("tspan");
+                if (id.size() === 1) {
+                    var metadata = items[id.text()];
+                    if (metadata) {
+                        var itemLabel = metadata.itemLabel.replace("{{index}}", id.text());
+                        //alert("This will navigate to: " + itemLabel);
+                        document.location = "#item" + id.text();
+                    }
+                }
+            }
+
+            function mouseenterStepIcon(event) {
+                event.stopPropagation();
+                var id = $(this).find("tspan");
+                if (id.size() === 1) {
+                    bStepHovered = true;
+                    if (lastHighlightedStep) {
+                        lastHighlightedStep.style.fill = "rgb(243, 243, 243)";
+                    }
+                    var ellipse = $(this).find("ellipse");
+                    ellipse[0].style.fill = "rgb(120, 255, 120)";
+                    $("#step-tip").html("<h4>" + items[id.text()].tip + "</h4>");
+                    lastHighlightedStep = ellipse[0];
+                }
+            }
+
+            function mouseleaveStepIcon(event) {
+                event.stopPropagation();
+                bStepHovered = false;
+            }
+
+            if (activeSteps.length > 0) {
+                setInterval(function() {
+                    if (!bStepHovered) {
+                        if (lastHighlightedStep) {
+                            lastHighlightedStep.style.fill = "rgb(243, 243, 243)";
+                        }
+                        stepIndex++;
+                        if (stepIndex === activeSteps.length) {
+                            stepIndex = 0;
+                        }
+                        lastHighlightedStep = activeSteps[stepIndex].shape;
+                        lastHighlightedStep.style.fill = "rgb(120, 255, 120)";
+                        $("#step-tip").html("<h4>" + activeSteps[stepIndex].tip + "</h4>");
+                    }
+                }, 3000);
+            }
 
         });
     }
