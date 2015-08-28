@@ -1,7 +1,6 @@
 var items = null;
 $(function() {
     var metaKey = $("body").attr("key");
-    alert(metaKey);
     $.getJSON( "./" + metaKey + '.json', function( data ) {
         items = data;
         var lessons = []
