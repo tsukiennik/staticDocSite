@@ -1,11 +1,35 @@
 var items = null;
 $(function() {
     var metaKey = $("body").attr("key");
-    $.getJSON( "./" + metaKey + '.json', function( data ) {
-        items = data;
+    $.getJSON( "assets/" + metaKey + '.json', function( data ) {
+        if (data.title) {
+            document.title = data.title;
+            $(".docTitle").text(data.title);
+        }
+        items = data.topics;
         var lessons = []
-        $.each( data, function( key, val ) {
-            lessons.push( "<h3><span>" + key + ". </span><a name='item" + key + "'></a><span>" + val.itemLabel.replace("{{index}}", key) + " - </span><a href='" + val.href.replace("{{index}}", key) + "'>see detail</a></h3><br/><br/><br/><br/><br/><br/><br/>" );
+        $.each( items, function( key, val ) {
+            link = "<div class='table'>"
+            link += "<div classs='bulletCell'><div class='numericBullet'>" + key + "</div></div><div class='tableCell'>&nbsp;&nbsp;</div>";
+            link += "<div class='tableCell'><h3><a name='item" + key + "'></a><span>" + val.itemLabel.replace("{{index}}", key) + "</span></h3>";
+            if (val.summary) {
+                link += "<p>" + val.summary + "</p>"
+            }
+            if (val.references) {
+                link += "<div><p class='bold'>References:</p>"
+                $.each(val.references, function (key, reference) {
+                    link += "<p><a href='" + reference.link + "'>"  + reference.text + "</p>";
+                });
+                link += "</div><br/>"
+            }
+            if (val.detail) {
+                link += "<div>"
+                link += "<p class='bold'><a href='" + val.detail.replace("{{index}}", key) + "'>Detailed discussion of this topic</a></p>";
+                link += "</div>"
+            }
+            link += "<br/><br/><br/>";
+            link += "</div></div>";
+            lessons.push(link);
         });
 
         $( "<br/><br/><br/><br/>").appendTo( "#dynamic" );
@@ -15,11 +39,14 @@ $(function() {
         }).appendTo( "#dynamic" );
 
         lessons = [];
-        $.each( data, function( key, val ) {
-            var link = val.href.replace("{{index}}", key);
-            if ((link.indexOf("#") === 0) && ($(link).size() === 0)) {
-                link = link.replace("#", "");
-                lessons.push( "<h3><a id='" + link + "' name='" + link + "'></a> " + val.lessonLabel + "</h3><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>" );
+        $.each( items, function( key, val ) {
+            if (val.detail) {
+                var link = val.detail.replace("{{index}}", key);
+                if ((link.indexOf("#") === 0) && ($(link).size() === 0)) {
+                    link = link.replace("#", "");
+                    link = "<h3><a id='" + link + "' name='" + link + "'></a> " + val.detailLabel + "</h3><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+                }
+                lessons.push(link);
             }
         });
         if (lessons.length > 0) {
@@ -32,7 +59,7 @@ $(function() {
         setup();
     });
     function setup() {
-        $('#svg-main').load("./" + metaKey + '.svg', null, function(data, status, xhr) {
+        $('#svg-main').load("assets/" + metaKey + '.svg', null, function(data, status, xhr) {
             $('#svg-main').find('svg').attr("width", "100%");
             $('#svg-main').find('svg').attr("height", "100%");
             $('#svg-main').find('svg').click(function(event) {
@@ -61,7 +88,7 @@ $(function() {
             });
 
             function clickStepIcon(event) {
-                event.stopPropagation();//fill: #f3f3f3
+                event.stopPropagation();
                 var id = $(this).find("tspan");
                 if (id.size() === 1) {
                     var metadata = items[id.text()];
@@ -94,6 +121,14 @@ $(function() {
             }
 
             if (activeSteps.length > 0) {
+                function highlightStep(index) {
+                    lastHighlightedStep = activeSteps[index].shape;
+                    lastHighlightedStep.style.fill = "rgb(120, 255, 120)";
+                    $("#step-tip").html("<h4>" + activeSteps[index].tip + "</h4>");
+                }
+
+                stepIndex = 0;
+                highlightStep(stepIndex);
                 setInterval(function() {
                     if (!bStepHovered) {
                         if (lastHighlightedStep) {
@@ -103,11 +138,10 @@ $(function() {
                         if (stepIndex === activeSteps.length) {
                             stepIndex = 0;
                         }
-                        lastHighlightedStep = activeSteps[stepIndex].shape;
-                        lastHighlightedStep.style.fill = "rgb(120, 255, 120)";
-                        $("#step-tip").html("<h4>" + activeSteps[stepIndex].tip + "</h4>");
+                        highlightStep(stepIndex);
                     }
                 }, 3000);
+
             }
 
         });

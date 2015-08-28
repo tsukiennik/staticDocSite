@@ -1,0 +1,58 @@
+{
+	"title": "Rapier - Fork Branching based on Step Results",
+	"topics": {
+		"1": {
+			"tip": "Explore Executing the Test Script...",
+			"itemLabel": "Execute the Test Script on Fork Branching",
+			"summary": "As we explored in the last section, it may be useful to BRANCH a script based on the PASS / FAIL status of the script.<br/><br/>Alternate Script Blocks such as OnScriptSuccess and OnScriptFailure will execute one of more steps.<br/><br/>But wouldn't it be useful to be able to FORK the execution of a script based on tests of the any values within the Data Pipeline?",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Details - Execute the Test Script on Fork Branching",
+			"references": [
+				{
+					"text": "View the Console Script used to execute this Tutorial",
+					"link": "https://github.com/equinix/gse-common/blob/master/rapierTestTutorial/rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh"
+				},
+				{
+					"text": "View the Test Script containing the Logic for this Tutorial",
+					"link": "https://github.com/equinix/gse-common/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json"
+				}
+			]
+		},
+		"2": {
+			"tip": "Explore Executing Script Steps in Parallel...",
+			"itemLabel": "The Compound Step will trigger method 1 and method 2 in parallel",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Details - The Compound Step will trigger method 1 and method 2 in parallel"
+		},
+		"3": {
+			"tip": "Explore Step Responses stored in the Data Pipeline...",
+			"itemLabel": "Response Bodies are stored in the Data Pipeline in the order in which they are received",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Details - Response Bodies are stored in the Data Pipeline in the order in which they are received"
+		},
+		"4": {
+			"tip": "Explore Extracting Variables from the Data Pipeline...",
+			"itemLabel": "Defined Fork Variables are extracted from the Data Pipeline",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Detail - Defined Fork Variables are extracted from the Data Pipeline"
+		},
+		"5": {
+			"tip": "Explore a Fork Branch NOT TAKEN...",
+			"itemLabel": "Fork Branch IS NOT EXECUTED as indicated by the Red Line",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Detail - Fork Branch IS NOT EXECUTED"
+		},
+		"6": {
+			"tip": "Explore a Fork Branch that IS TAKEN......",
+			"itemLabel": "Fork Branch IS EXECUTED as indicated by the Green Line",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Detail - Fork Branch IS EXECUTED"
+		},
+		"7": {
+			"tip": "Explore Fork Branch Responses",
+			"itemLabel": "Fork Branchs will reflect their responses within the Data Pipeline",
+			"detail": "#lesson{{index}}",
+			"detailLabel": "Detail - Fork Branchs will reflect their responses within the Data Pipeline"
+		}
+	}
+}

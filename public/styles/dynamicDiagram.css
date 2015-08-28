@@ -1,0 +1,53 @@
+.table {
+    display: table;
+}
+.bulletCell {
+    display: table-cell;
+    padding-right: 8px;
+}
+.bold {
+    font-weight: bold;
+}
+.tableCell {
+    display: table-cell;
+    width: auto;
+}
+h3 {
+    margin-top: 0px;
+}
+.docTitle {
+    text-align: center;
+}
+.numericBullet {
+    background-color: #f3f3f3;
+    padding: 4px;
+    border-radius: 50px;
+    font-size: 100%;
+    border: 1px black solid;
+    font-weight: bold;
+    padding: 2px 6px 2px 6px;
+}
+body {
+    background-color:#FAF7EA;
+}
+.stepTip {
+    width:60%; 
+    text-align:center; 
+    margin: 0 auto; 
+    margin-top:20px; 
+    background-color: #ffffff; 
+    padding: 5px; 
+    border:1px black solid; 
+    border-radius:50px;
+}
+.conceptDiagram {
+    width:80%; 
+    text-align:center; 
+    max-width:800px; 
+    margin: 0 auto; 
+    margin-top:10px; 
+    background-color: #cccccc; 
+    padding: 10px; 
+    border:1px black solid; 
+    border-radius:20px;
+}

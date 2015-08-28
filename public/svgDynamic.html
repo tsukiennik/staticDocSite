@@ -3,12 +3,14 @@
 <html>
     <head>
         <title></title>
-        <script src="./jquery.js"></script>
-        <script src="./dynamicDiagram.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/dynamicDiagram.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/dynamicDiagram.css">
     </head>
-    <body key='forkToBranches' style="background-color:#FAF7EA;">
-        <div id='svg-main' style='width:80%; text-align:center; max-width:800px; margin: 0 auto; margin-top:30px; background-color: #ffffff; padding: 10px; border:1px black solid; border-radius:20px;'></div>
-        <div id='step-tip' style='width:60%; text-align:center; margin: 0 auto; margin-top:10px; background-color: #ffffff; padding: 5px; border:1px black solid; border-radius:50px;'></div>
+    <body key='forkToBranches'>
+        <h2 class="docTitle"></h2>
+        <div id='step-tip' class='stepTip'></div>
+        <div id='svg-main' class='conceptDiagram'></div>
         <div id="dynamic"></div>
     </body>
 </html>
