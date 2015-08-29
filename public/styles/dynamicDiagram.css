@@ -15,27 +15,44 @@
 h3 {
     margin-top: 0px;
 }
+pre, code {
+    background-color: #eeeeee;
+    border: 1px #555555 solid;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+ol {
+    width: auto;
+}
+
+li {
+    margin-bottom: 6px;
+    width: auto;
+}
 .docTitle {
     text-align: center;
 }
 .numericBullet {
     background-color: #f3f3f3;
-    padding: 4px;
+    padding: 9px;
     border-radius: 50px;
-    font-size: 100%;
+    font-size: 75%;
     border: 1px black solid;
     font-weight: bold;
     padding: 2px 6px 2px 6px;
 }
 body {
     background-color:#FAF7EA;
+    margin: 15px;
 }
 .stepTip {
-    width:60%; 
+    width:70%; 
+    max-width:700px; 
     text-align:center; 
     margin: 0 auto; 
     margin-top:20px; 
-    background-color: #ffffff; 
+    background-color: #eeeeee; 
     padding: 5px; 
     border:1px black solid; 
     border-radius:50px;

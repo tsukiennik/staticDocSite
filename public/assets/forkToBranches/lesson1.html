@@ -1,0 +1,31 @@
+<ol>
+<li><strong>Execute</strong> the <strong>findPetsByStatusPending</strong> parallel step...</li>
+<li><strong>Execute</strong> the <strong>findPetsByStatusSold</strong> parallel step...</li>
+<li>A <strong>fork</strong> can be defined <strong>within any step</strong> in a <strong>script</strong>...</li>
+<li>Within a <strong>fork</strong>, a set of <strong>variables</strong> can be <strong>extracted</strong> from the <strong>Data Pipeline</strong> and, in this case, we'll <strong>extract</strong> the <strong>responseBody</strong> of the <strong>first parallel step to respond</strong>. See <strong>9</strong> above and below in the <strong>Data Pipeline</strong> to understand the <code>getPetCollections..responseBody..responseBody[0]</code> <strong>query specification</strong>.</li>
+<li><strong>Test</strong> to see if the <strong>first object</strong> within the <strong>extracted responseBody</strong> has a <strong>status property</strong> value of <strong>pending</strong>.  In this example, you can see this would evaluate as <strong>false</strong>.</li>
+<li><strong>Test</strong> to see if the <strong>first object</strong> within the <strong>extracted responseBody</strong> has a <strong>status property</strong> value of <strong>sold</strong>.  In this example, you can see this would evaluate as <strong>true</strong>.</li>
+<li>Define a <strong>Script Branch Segment</strong> with the name <strong>pendingFirst</strong>...</li>
+<li>Define a <strong>Script Branch Segment</strong> with the name <strong>soldFirst</strong>...</li>
+<li>Locate the <strong>first response results array</strong> within the <strong>getPetCollections compound step</strong>...</li>
+<li>Locate the <strong>status property</strong> within the <strong>first result</strong> within the <strong>first response results array</strong> as tested in <strong>5</strong> and <strong>6</strong> above.</li>
+</ol>
+
+<pre>
+  .
+  .
+  .
+  "soldFinishedFirst": {
+      "pass": true,
+      "apiMethod": "generalUtils.pause",
+      "description": "Sold...",
+      "timestamp": "2015-08-14 18:53:14 GMT",
+      "errorResponse": false,
+      "responseCode": 200,
+      "responseBody": {
+          "message": "Resuming Script after pausing"
+      },
+      .
+      .
+      .
+</pre>

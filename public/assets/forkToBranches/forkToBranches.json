@@ -7,6 +7,7 @@
 			"summary": "As we explored in the last section, it may be useful to BRANCH a script based on the PASS / FAIL status of the script.<br/><br/>Alternate Script Blocks such as OnScriptSuccess and OnScriptFailure will execute one of more steps.<br/><br/>But wouldn't it be useful to be able to FORK the execution of a script based on tests of the any values within the Data Pipeline?",
 			"detail": "#lesson{{index}}",
 			"detailLabel": "Details - Execute the Test Script on Fork Branching",
+			"detailMarkup": "assets/forkToBranches/lesson1.html",
 			"references": [
 				{
 					"text": "View the Console Script used to execute this Tutorial",

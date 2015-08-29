@@ -1,7 +1,7 @@
 var items = null;
 $(function() {
     var metaKey = $("body").attr("key");
-    $.getJSON( "assets/" + metaKey + '.json', function( data ) {
+    $.getJSON( "assets/" + metaKey + "/" + metaKey + '.json', function( data ) {
         if (data.title) {
             document.title = data.title;
             $(".docTitle").text(data.title);
@@ -18,7 +18,7 @@ $(function() {
             if (val.references) {
                 link += "<div><p class='bold'>References:</p>"
                 $.each(val.references, function (key, reference) {
-                    link += "<p><a href='" + reference.link + "'>"  + reference.text + "</p>";
+                    link += "<p><a href='" + reference.link + "'>"  + reference.text + "</a></p>";
                 });
                 link += "</div><br/>"
             }
@@ -32,34 +32,83 @@ $(function() {
             lessons.push(link);
         });
 
-        $( "<br/><br/><br/><br/>").appendTo( "#dynamic" );
+        $( "<br/><br/><br/>").appendTo( "#dynamic" );
         $( "<div/>", {
         "class": "itemlist",
         html: lessons.join( "" )
         }).appendTo( "#dynamic" );
 
+        $( "<hr/>").appendTo( "#dynamic" );
+
         lessons = [];
+        var itemKeys = [];
         $.each( items, function( key, val ) {
+            itemKeys.push(key);
+        });
+
+        function processNextDetail(index) {
+            index++;
+            if (index < itemKeys.length) {
+                processDetail(index);
+            }
+            else {
+                if (lessons.length > 0) {
+                    $( "<br/><br/><br/><br/>").appendTo( "#dynamic" );
+                    $( "<div/>", {
+                    "class": "itemlist",
+                    html: lessons.join( "" ) + "</div>"
+                    }).appendTo( "#dynamic" );
+                }
+                setup();
+            }
+        }
+
+        function processDetail(index) {
+            var val = items[itemKeys[index]];
+            var key = itemKeys[index];
+
+            function wrapUp(link) {
+                if (val.references) {
+                    link += "<div><p class='bold'>References:</p>"
+                    $.each(val.references, function (key, reference) {
+                        link += "<p><a href='" + reference.link + "'>"  + reference.text + "</a></p>";
+                    });
+                    link += "</div><br/>"
+                }
+                link += "<br/><br/><br/><br/>";
+                link += "</div></div>"
+                lessons.push(link);
+                processNextDetail(index);
+            }
+
             if (val.detail) {
                 var link = val.detail.replace("{{index}}", key);
                 if ((link.indexOf("#") === 0) && ($(link).size() === 0)) {
-                    link = link.replace("#", "");
-                    link = "<h3><a id='" + link + "' name='" + link + "'></a> " + val.detailLabel + "</h3><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+                    var href = link.replace("#", "");
+                    link = "<div class='table'>"
+                    link += "<div classs='bulletCell'><div class='numericBullet'>" + key + "</div></div><div class='tableCell'>&nbsp;&nbsp;</div>";
+                    link += "<div class='tableCell'><h3><a id='" + href + "' name='" + href + "'></a> " + val.detailLabel + "</h3>";
+                    if (val.detailMarkup) {
+                        $.get( val.detailMarkup, function( data ) {
+                            link += data;
+                            wrapUp(link);
+                        });
+                    }
+                    else {
+                        wrapUp(link);
+                    }
                 }
-                lessons.push(link);
+                else {
+                    processNextDetail(index);
+                }
             }
-        });
-        if (lessons.length > 0) {
-            $( "<br/><br/><br/><br/>").appendTo( "#dynamic" );
-            $( "<div/>", {
-            "class": "itemlist",
-            html: lessons.join( "" )
-            }).appendTo( "#dynamic" );
         }
-        setup();
+
+        processDetail(0);
+
     });
     function setup() {
-        $('#svg-main').load("assets/" + metaKey + '.svg', null, function(data, status, xhr) {
+        $('#svg-main').load("assets/" + metaKey + "/" + metaKey + '.svg', null, function(data, status, xhr) {
             $('#svg-main').find('svg').attr("width", "100%");
             $('#svg-main').find('svg').attr("height", "100%");
             $('#svg-main').find('svg').click(function(event) {
