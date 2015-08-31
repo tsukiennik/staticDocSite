@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="47cm" height="35cm" viewBox="403 42 923 684" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="47cm" height="40cm" viewBox="403 42 923 794" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <rect style="fill: #fafafa" x="1122.5" y="233.2" width="202.498" height="330.8"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1122.5" y="233.2" width="202.498" height="330.8"/>
@@ -303,10 +303,10 @@
     </text>
   </g>
   <g>
-    <ellipse style="fill: #f3f3f3" cx="934.39" cy="387.833" rx="23.0999" ry="20.8242"/>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="934.39" cy="387.833" rx="23.0999" ry="20.8242"/>
-    <text font-size="15.0594" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="934.39" y="393.471">
-      <tspan x="934.39" y="393.471">4</tspan>
+    <ellipse style="fill: #f3f3f3" cx="934.39" cy="387.832" rx="23.0999" ry="20.8242"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="934.39" cy="387.832" rx="23.0999" ry="20.8242"/>
+    <text font-size="15.0594" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="934.39" y="393.47">
+      <tspan x="934.39" y="393.47">4</tspan>
     </text>
   </g>
   <g>
@@ -330,4 +330,14 @@
       <tspan x="916.388" y="543.471">7</tspan>
     </text>
   </g>
+  <g>
+    <ellipse style="fill: #e6e6e6" cx="634.388" cy="813.333" rx="23.4562" ry="21.1453"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="634.388" cy="813.333" rx="23.4562" ry="21.1453"/>
+    <text font-size="15.0594" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="634.388" y="818.971">
+      <tspan x="634.388" y="818.971">N</tspan>
+    </text>
+  </g>
+  <text font-size="22.6229" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="675.5" y="821.8">
+    <tspan x="675.5" y="821.8">Hover or Click Numbered Items to Learn More</tspan>
+  </text>
 </svg>

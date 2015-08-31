@@ -75,6 +75,9 @@ $(function() {
                     });
                     link += "</div><br/>"
                 }
+                link += "<div>"
+                link += "<p class='bold'><a href='#top'>Back to Top</a></p>";
+                link += "</div>"
                 link += "<br/><br/><br/><br/>";
                 link += "</div></div>"
                 lessons.push(link);
@@ -90,6 +93,12 @@ $(function() {
                     link += "<div class='tableCell'><h3><a id='" + href + "' name='" + href + "'></a> " + val.detailLabel + "</h3>";
                     if (val.detailMarkup) {
                         $.get( val.detailMarkup, function( data ) {
+                            while (data.indexOf("<pre><code>") >= 0) {
+                                data = data.replace("<pre><code>", "<pre>");
+                            }
+                            while (data.indexOf("</code></pre>") >= 0) {
+                                data = data.replace("</code></pre>", "</pre>");
+                            }
                             link += data;
                             wrapUp(link);
                         });
@@ -119,19 +128,20 @@ $(function() {
             var stepIndex = -1;
             var bStepHovered = false;
             $('#svg-main').find('ellipse').parent().each(function(step) {
-                var id = $(this).find("tspan");
-                if (id.size() === 1) {
-                    var metadata = items[id.text()];
-                    if (metadata) {
-                        var tip = metadata.tip.replace("{{index}}", id.text());
-                        this.setAttribute("title", tip);
-                    }
-                }
                 var ellipse = $(this).find("ellipse");
                 if (ellipse[0].style.fill === "rgb(243, 243, 243)") {
+                    var id = $(this).find("tspan");
+                    if (id.size() === 1) {
+                        var metadata = items[id.text()];
+                        if (metadata) {
+                            var tip = metadata.tip.replace("{{index}}", id.text());
+                            this.setAttribute("title", tip);
+                        }
+                    }
                     $(this).click(clickStepIcon);
                     $(this).mouseenter(mouseenterStepIcon);
                     $(this).mouseleave(mouseleaveStepIcon);
+                    $(this).css("cursor", "pointer");
                     activeSteps.push({ shape: ellipse[0], tip: items[id.text()].tip });
                 }
             });
