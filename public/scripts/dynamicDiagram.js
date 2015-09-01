@@ -1,6 +1,10 @@
 var items = null;
+var metaKey = null;
 $(function() {
-    var metaKey = $("body").attr("key");
+    metaKey = getQueryVariable("pageID"); //$("body").attr("key");
+    if (!metaKey) {
+        return;
+    }
     $.getJSON( "assets/" + metaKey + "/" + metaKey + '.json', function( data ) {
         if (data.title) {
             document.title = data.title;
@@ -207,3 +211,18 @@ $(function() {
     }
 });
 
+function getQueryVariable(variable) {
+    var query = document.location.href.split("?");
+    if (query.length === 1) {
+        return;
+    }
+    var vars = query[1].split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            pair = pair[1].split("#");
+            return decodeURIComponent(pair[0]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}

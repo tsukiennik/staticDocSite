@@ -1,0 +1,29 @@
+<p>Now let's explore a portion of the <strong>Data Pipeline</strong> for the first <strong>API Method</strong> to respond in this sample.</p>
+<pre><code>
+    .
+    .
+    .
+    "getPetCollections": {
+        "pass": true,
+        "description": "The 'sub-steps' below will be executed in parallel...",
+        "timestamp": "2015-08-14 18:53:13 GMT",
+        "errorResponse": false,
+        "responseBody": [{
+         "findPetsByStatusSold": {
+                "pass": true,
+                "apiMethod": "findPetsByStatus",
+                "description": "Finds Pets by status Sold",
+                "timestamp": "2015-08-14 18:53:13 GMT",
+                "errorResponse": false,
+                "responseCode": 200,
+9.|             "responseBody": [
+                  {
+                    "id": 5,
+                    "name": "Dog 2",
+10.|                "status": "sold"
+                  }, 
+                  .
+                  .
+                  .
+</code></pre>
+

@@ -2,46 +2,90 @@
 	"title": "Rapier - Fork Branching based on Step Results",
 	"topics": {
 		"1": {
-			"tip": "Explore Executing the Test Script...",
-			"itemLabel": "Execute the Test Script on Fork Branching",
+			"tip": "Setting up to run our Fork Branching Test Script...",
+			"itemLabel": "Setting up to run our Fork Branching Test Script",
 			"summary": "As we explored in the last section, it may be useful to BRANCH a script based on the PASS / FAIL status of the script.<br/><br/>Alternate Script Blocks such as OnScriptSuccess and OnScriptFailure will execute one of more steps.<br/><br/>But wouldn't it be useful to be able to FORK the execution of a script based on tests of the any values within the Data Pipeline?",
 			"detail": "#lesson{{index}}",
-			"detailLabel": "Details - Execute the Test Script on Fork Branching",
+			"detailLabel": "Details - Setting up to run our Fork Branching Test Script",
 			"detailMarkup": "assets/forkToBranches/lesson1.html",
 			"references": [
 				{
 					"text": "View the Console Script used to execute this Tutorial",
-					"link": "https://github.com/equinix/gse-common/blob/master/rapierTestTutorial/rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh"
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh"
 				},
 				{
 					"text": "View the Test Script containing the Logic for this Tutorial",
-					"link": "https://github.com/equinix/gse-common/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json"
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json"
 				}
 			]
 		},
 		"2": {
 			"tip": "Explore Executing Script Steps in Parallel...",
 			"itemLabel": "The Compound Step will trigger method 1 and method 2 in parallel",
+			"summary": "<p>To set the scene, let's review the <strong>script segment</strong> below which makes <strong>Two API Method Calls in Parallel</strong>.</p><p>Because <strong>findPetsByStatusPending (1)</strong> and <strong>findPetsByStatusSold (2)</strong> are executed in <strong>Parallel</strong> and <strong>Server API Processing Latency</strong> can vary, there is no way to predict which method will respond first.</p>",
 			"detail": "#lesson{{index}}",
-			"detailLabel": "Details - The Compound Step will trigger method 1 and method 2 in parallel"
+			"detailLabel": "Details - The Compound Step will trigger method 1 and method 2 in parallel",
+			"detailMarkup": "assets/forkToBranches/lesson2.html",
+			"references": [
+				{
+					"text": "Execute API Method Calls in Parallel",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json#L14"
+				}
+			]
 		},
 		"3": {
 			"tip": "Explore Step Responses stored in the Data Pipeline...",
 			"itemLabel": "Response Bodies are stored in the Data Pipeline in the order in which they are received",
+			"summary": "<p>Now let's explore portions of the <strong>Data Pipeline</strong></a> for this sample.</p>",
 			"detail": "#lesson{{index}}",
-			"detailLabel": "Details - Response Bodies are stored in the Data Pipeline in the order in which they are received"
+			"detailLabel": "Details - Response Bodies are stored in the Data Pipeline in the order in which they are received",
+			"detailMarkup": "assets/forkToBranches/lesson3.html",
+			"references": [
+				{
+					"text": "Results for the first Parallel API to respond",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L24"
+				},
+				{
+					"text": "Results for the second Parallel API to respond",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L136"
+				}
+			]
 		},
 		"4": {
 			"tip": "Explore Extracting Variables from the Data Pipeline...",
 			"itemLabel": "Defined Fork Variables are extracted from the Data Pipeline",
 			"detail": "#lesson{{index}}",
-			"detailLabel": "Detail - Defined Fork Variables are extracted from the Data Pipeline"
+			"summary": "Any <strong>Step</strong> within a <strong>Script</strong> can be configured with a <strong>Fork Block</strong>.  Then just use a simple <strong>JSONPath</strong> query to isolate the <strong>Variables</strong> you like to test.",
+			"detailLabel": "Detail - Defined Fork Variables are extracted from the Data Pipeline",
+			"detailMarkup": "assets/forkToBranches/lesson4.html",
+			"references": [
+				{
+					"text": "Extract the First API Response from the Two Parallel Methods",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json#L34"
+				},
+				{
+					"text": "Results for the first Parallel API to respond",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L24"
+				}
+			]
 		},
 		"5": {
 			"tip": "Explore a Fork Branch NOT TAKEN...",
 			"itemLabel": "Fork Branch IS NOT EXECUTED as indicated by the Red Line",
+			"summary": "The first <strong>Fork Branch</strong> in this example will will <strong>NOT EXECUTE</strong> based on the state of the <strong>Data Pipeline</strong>.",
 			"detail": "#lesson{{index}}",
-			"detailLabel": "Detail - Fork Branch IS NOT EXECUTED"
+			"detailLabel": "Detail - Fork Branch IS NOT EXECUTED",
+			"detailMarkup": "assets/forkToBranches/lesson5.html",
+			"references": [
+				{
+					"text": "Test for First Response was a 'pending status'",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json#L36"
+				},
+				{
+					"text": "Status for the first Object in the First Response",
+					"link": "https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L39"
+				}
+			]
 		},
 		"6": {
 			"tip": "Explore a Fork Branch that IS TAKEN......",

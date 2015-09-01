@@ -1,0 +1,22 @@
+<p>The first <strong>Fork Branch</strong> in this example will will <strong>NOT EXECUTE</strong> based on the state of the <strong>Data Pipeline</strong></p>.
+
+<p>Review the first <strong>Fork Test</strong> as indicated in the line labelled <strong>5</strong> below.</p>
+
+<pre><code>
+    .
+    .
+    .
+3.|       "fork": {
+            "variables": {
+4.|           "firstResponse": "getPetCollections..responseBody..responseBody[0]"
+            },
+5.|         "pendingFirst": "( firstResponse[0].status == 'pending' )",
+6.|         "soldFirst": "( firstResponse[0].status == 'sold' )"
+          }
+                  .
+                  .
+                  .
+</code></pre>
+
+
+

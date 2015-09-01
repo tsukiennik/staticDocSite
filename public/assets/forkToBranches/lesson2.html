@@ -1,0 +1,27 @@
+<p>To set the scene, let's review the <strong>script segment</strong> below which makes <strong>Two API Method Calls in Parallel</strong>.</p>
+
+<pre><code>  "steps": {
+    "getPetCollections": {
+      "description": "The 'sub-steps' below will be executed in parallel...",
+1.|   "findPetsByStatusPending": {
+        "description": "Finds Pets by status Pending",
+        "method": "findPetsByStatus",
+        "path": "get:/pet/findByStatus",
+        "params": {
+          "status": "pending"
+        }
+      },
+2.|   "findPetsByStatusSold": {
+        "description": "Finds Pets by status Sold",
+        "method": "findPetsByStatus",
+        "path": "get:/pet/findByStatus",
+        "params": {
+          "status": "sold"
+        }
+      },
+
+</code></pre>
+
+<p>Because <strong>findPetsByStatusPending (1)</strong> and <strong>findPetsByStatusSold (2)</strong> are executed in <strong>Parallel</strong> and <strong>Server API Processing Latency</strong> can vary, there is no way to predict which method will respond first.</p>
+
+

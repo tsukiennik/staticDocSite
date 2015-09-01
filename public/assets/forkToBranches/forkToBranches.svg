@@ -331,13 +331,13 @@
     </text>
   </g>
   <g>
-    <ellipse style="fill: #e6e6e6" cx="634.388" cy="813.333" rx="23.4562" ry="21.1453"/>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="634.388" cy="813.333" rx="23.4562" ry="21.1453"/>
-    <text font-size="15.0594" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="634.388" y="818.971">
-      <tspan x="634.388" y="818.971">N</tspan>
+    <ellipse style="fill: #e6e6e6" cx="593.388" cy="813.333" rx="23.4562" ry="21.1453"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="593.388" cy="813.333" rx="23.4562" ry="21.1453"/>
+    <text font-size="15.0594" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="593.388" y="818.971">
+      <tspan x="593.388" y="818.971">N</tspan>
     </text>
   </g>
-  <text font-size="22.6229" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="675.5" y="821.8">
-    <tspan x="675.5" y="821.8">Hover or Click Numbered Items to Learn More</tspan>
+  <text font-size="22.6229" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="634.5" y="821.8">
+    <tspan x="634.5" y="821.8">Hover or Click Numbered Items to Learn More</tspan>
   </text>
 </svg>

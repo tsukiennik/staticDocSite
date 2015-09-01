@@ -1,0 +1,19 @@
+<p>Any <strong>Step</strong> within a <strong>Script</strong> can be configured with a <strong>Fork Block</strong> as indicated in the line labelled <strong>3</strong> below.</p>
+
+<p>Just use a simple <strong>JSONPath</strong> query to isolate the <strong>First API Response</strong> as indicated in the line labelled <strong>4</strong> below.</p>
+
+<pre><code>
+    .
+    .
+    .
+3.|       "fork": {
+            "variables": {
+4.|           "firstResponse": "getPetCollections..responseBody..responseBody[0]"
+            },
+5.|         "pendingFirst": "( firstResponse[0].status == 'pending' )",
+6.|         "soldFirst": "( firstResponse[0].status == 'sold' )"
+          }
+                  .
+                  .
+                  .
+</code></pre>

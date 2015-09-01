@@ -1,0 +1,213 @@
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><p>As we explored in the last section, it may be useful to <strong>BRANCH</strong> a <strong>script</strong> based on the <strong>PASS / FAIL</strong> status of the <strong>script</strong>.  <strong>Alternate Script Blocks</strong> such as <strong>OnScriptSuccess</strong> and <strong>OnScriptFailure</strong> will execute one of more <strong>steps</strong>.</p>
+
+<p>But wouldn't it be useful to be able to <strong>FORK</strong> the <strong>execution</strong> of a <strong>script</strong> based on <strong>tests</strong> of the any values within the <strong>Data Pipeline</strong>?  </p>
+
+<p>We'll now discuss how to <strong>fork</strong> a <strong>script</strong> to any number of <strong>Alternate Script Blocks</strong> based on a series of <strong>configured tests</strong>. </p>
+
+<p>To set the scene, review the discussion of <a href="#execution-test-script-steps-in-parallel"><strong>Execution Test Script Steps in Parallel</strong></a> and the <strong>script segment</strong> below which makes <strong>Two API Method Calls in Parallel</strong>.</p>
+
+<pre><code>  "steps": {
+    "getPetCollections": {
+      "description": "The 'sub-steps' below will be executed in parallel...",
+1.|   "findPetsByStatusPending": {
+        "description": "Finds Pets by status Pending",
+        "method": "findPetsByStatus",
+        "path": "get:/pet/findByStatus",
+        "params": {
+          "status": "pending"
+        }
+      },
+2.|   "findPetsByStatusSold": {
+        "description": "Finds Pets by status Sold",
+        "method": "findPetsByStatus",
+        "path": "get:/pet/findByStatus",
+        "params": {
+          "status": "sold"
+        }
+      },
+
+</code></pre>
+
+<p>Because <strong>findPetsByStatusPending (1)</strong> and <strong>findPetsByStatusSold (2)</strong> are executed in <strong>Parallel</strong> and <strong>Server API Processing Latency</strong> can vary, there is no way to predict which method will respond first.</p>
+
+<p>Check out these <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/tsukiennik/rapierTestTutorialResults/master/testMyAPI_ForkBranching_Sample.html?token=AJeYyqxhL5Ujgq1s-qf9G7BlVTQTT1AWks5V14M1wA%3D%3D"><strong>Test Results</strong></a> and notice that <strong>findPetsByStatusSold (2)</strong> responded <strong>first</strong> during a specific invocation of the <strong>script</strong>...</p>
+
+<p>Follow the steps below in order to test and explore the concept of <strong>Fork Branching</strong>.</p>
+
+<pre><code>cd rapierTest/tutorial
+  # Prepare to run the Tutorial Scripts
+
+./e0_testMyAPI_ForkBranching.sh
+  # Run a Test Script that actually hits an API 2 times, in parallel within a step.
+  # Then FORK BRANCH to a defined SCRIPT SEGMENT based on the order the API Calls responded.
+</code></pre>
+
+<p>Inspect the Run Command illustrated below: <a href="https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh?token=AJeYysAU1p32DzSDdBcBKQdc_bmIYvhVks5V14NlwA%3D%3D"><strong>./rapierTest/tutorial/e0_testMyAPI_ForkBranching.sh</strong></a></p>
+
+<pre><code>SCRIPT="./tutorial/executionScripts/testMyAPI_ForkBranching.json" OUTPUT="quick" API_NAME=myAPI API_HOST= 
+TRANSFORM="htmlMarkup.html" NODE_ENV="development" PROPERTIES="./properties/qa.json" node ../rapierTest.js
+
+</code></pre>
+
+<p>Next, explore <a href="https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json?token=AJeYyh6yrbwqdDQOo_pMTqXSRUQoIUa8ks5V14OEwA%3D%3D"><strong>./rapierTest/tutorial/executionScripts/testMyAPI_ForkBranching.json</strong></a> as illustrated in the <strong>code block</strong> below.</p>
+
+<pre><code>    {
+      "title": "Fork Branching",
+      "description": "Divert Script to a defined Branch based on Results in the Data Pipeline...",
+      "utilityServices": [
+        "generalUtils"
+      ],
+      "apis": {
+        "myAPI": {
+          "host": "=properties.apiConfig.myAPI.host",
+          "default": true
+        }
+      },
+      "steps": {
+        "getPetCollections": {
+          "description": "The 'sub-steps' below will be executed in parallel...",
+1.|       "findPetsByStatusPending": {
+            "description": "Finds Pets by status Pending",
+            "method": "findPetsByStatus",
+            "path": "get:/pet/findByStatus",
+            "params": {
+              "status": "pending"
+            }
+          },
+2.|       "findPetsByStatusSold": {
+            "description": "Finds Pets by status Sold",
+            "method": "findPetsByStatus",
+            "path": "get:/pet/findByStatus",
+            "params": {
+              "status": "sold"
+            }
+          },
+3.|       "fork": {
+            "variables": {
+4.|           "firstResponse": "getPetCollections..responseBody..responseBody[0]"
+            },
+5.|         "pendingFirst": "( firstResponse[0].status == 'pending' )",
+6.|         "soldFirst": "( firstResponse[0].status == 'sold' )"
+          }
+        }
+      },
+7.|   "pendingFirst": {
+        "pendingFinishedFirst": {
+          "description": "Pending",
+          "method": "generalUtils.pause",
+          "params": {
+            "interval": 0.2
+          }
+        }
+      },
+8.|   "soldFirst": {
+        "soldFinishedFirst": {
+          "description": "Sold...",
+          "method": "generalUtils.pause",
+          "params": {
+            "interval": 0.2
+          }
+        }
+      }
+    }
+
+</code></pre>
+
+<p>Now let's explore portions of the <a href="https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L24"><strong>Data Pipeline</strong></a> for this sample.</p>
+
+<pre><code>    .
+    .
+    .
+    "getPetCollections": {
+        "pass": true,
+        "description": "The 'sub-steps' below will be executed in parallel...",
+        "timestamp": "2015-08-14 18:53:13 GMT",
+        "errorResponse": false,
+        "responseBody": [{
+         "findPetsByStatusSold": {
+                "pass": true,
+                "apiMethod": "findPetsByStatus",
+                "description": "Finds Pets by status Sold",
+                "timestamp": "2015-08-14 18:53:13 GMT",
+                "errorResponse": false,
+                "responseCode": 200,
+9.|             "responseBody": [
+                  {
+                    "id": 5,
+                    "name": "Dog 2",
+10.|                "status": "sold"
+                  }, 
+                  .
+                  .
+                  .
+</code></pre>
+
+<ol>
+<li><strong>Execute</strong> the <strong>findPetsByStatusPending</strong> parallel step...</li>
+<li><strong>Execute</strong> the <strong>findPetsByStatusSold</strong> parallel step...</li>
+<li>A <strong>fork</strong> can be defined <strong>within any step</strong> in a <strong>script</strong>...</li>
+<li>Within a <strong>fork</strong>, a set of <strong>variables</strong> can be <strong>extracted</strong> from the <strong>Data Pipeline</strong> and, in this case, we'll <strong>extract</strong> the <strong>responseBody</strong> of the <strong>first parallel step to respond</strong>. See <strong>9</strong> above and below in the <strong>Data Pipeline</strong> to understand the <code>getPetCollections..responseBody..responseBody[0]</code> <strong>query specification</strong>.</li>
+<li><strong>Test</strong> to see if the <strong>first object</strong> within the <strong>extracted responseBody</strong> has a <strong>status property</strong> value of <strong>pending</strong>.  In this example, you can see this would evaluate as <strong>false</strong>.</li>
+<li><strong>Test</strong> to see if the <strong>first object</strong> within the <strong>extracted responseBody</strong> has a <strong>status property</strong> value of <strong>sold</strong>.  In this example, you can see this would evaluate as <strong>true</strong>.</li>
+<li>Define a <strong>Script Branch Segment</strong> with the name <strong>pendingFirst</strong>...</li>
+<li>Define a <strong>Script Branch Segment</strong> with the name <strong>soldFirst</strong>...</li>
+<li>Locate the <strong>first response results array</strong> within the <strong>getPetCollections compound step</strong>...</li>
+<li>Locate the <strong>status property</strong> within the <strong>first result</strong> within the <strong>first response results array</strong> as tested in <strong>5</strong> and <strong>6</strong> above.</li>
+</ol>
+
+<p>As you can see within the <a href="https://github.com/aquajs/aquajs-rapier/blob/master/rapierTestTutorial/rapierTest/overallResults/testMyAPI_ForkBranching_Full_Sample.json#L192"><strong>Data Pipeline</strong></a> the <strong>Script Branch Segment</strong> with the name <strong>soldFirst</strong> was executed as a result of the <strong>Test</strong> at <strong>6</strong> above.</p>
+
+<pre><code>  .
+  .
+  .
+  "soldFinishedFirst": {
+      "pass": true,
+      "apiMethod": "generalUtils.pause",
+      "description": "Sold...",
+      "timestamp": "2015-08-14 18:53:14 GMT",
+      "errorResponse": false,
+      "responseCode": 200,
+      "responseBody": {
+          "message": "Resuming Script after pausing: 0.2 seconds"
+      },
+      .
+      .
+      .
+</code></pre>
+
+<p>Now let's explore the concept of <strong>Fork Branches</strong> conceptually in the diagram below.</p>
+
+<p><a href="https://raw.githubusercontent.com/tsukiennik/rapierImages/master/forkToBranches.png?token=AJeYylkTMfkpXYgXP5Jv3Ei2nxVKnj6aks5V14OgwA%3D%3D" target="_blank"><img src="https://raw.githubusercontent.com/tsukiennik/rapierImages/master/forkToBranches.png?token=AJeYylkTMfkpXYgXP5Jv3Ei2nxVKnj6aks5V14OgwA%3D%3D" alt="" style="max-width:100%;"></a></p>
+
+<ol>
+<li><strong>Execute</strong> a <strong>script</strong> as any other.</li>
+<li>The <strong>Compound Step</strong> will trigger <strong>method 1</strong> and <strong>method 2</strong> in <strong>parallel</strong>.</li>
+<li>As each <strong>parallel method responds</strong>, their respective <strong>response bodies</strong> are stored in the <strong>Data Pipeline</strong> in the order in which they are received.</li>
+<li>Any defined <strong>Fork Variables</strong> are <strong>extracted</strong> from the <strong>Data Pipeline</strong>.</li>
+<li>The <strong>1 Won Fork Test</strong> is evaluated and, in this example, the <strong>1 Won branch IS NOT EXECUTED</strong> as indicated by the <strong>Red Line</strong>.</li>
+<li>The <strong>2 Won Fork Test</strong> is evaluated and, in this example, the <strong>2 Won branch IS EXECUTED</strong> as indicated by the <strong>Green Line</strong>.</li>
+<li><strong>All Steps</strong> within the <strong>2 Won Branch</strong> will reflect their <strong>responses</strong> within the <strong>Data Pipeline</strong>.</li>
+</ol>
+
+<p><strong>NOTE:</strong> If <strong>multiple tests</strong> within a <strong>fork branch block</strong> evaluate to <strong>true</strong>, ONLY the <strong>first branch</strong> to evaluate <strong>true</strong> will be <strong>executed</strong>.  See below that the <strong>fork tests</strong> will follow the common <strong>if / then / else if / then / else if...</strong> pattern.</p>
+
+<pre><code>          "fork": {
+            "variables": {
+              "firstResponse": "getPetCollections..responseBody..responseBody[0]"
+            },
+1.|         "pendingFirst": "( firstResponse[0].status == 'pending' )",
+2.|         "soldFirst": "( firstResponse[0].status == 'sold' )"
+          }
+
+IS EQUIVALENT LOGICALLY TO:
+
+1.|   if ( firstResponse[0].status == 'pending' ) {
+        // Branch to 'pendingFirst'
+      }
+      else {
+2.|     if ( firstResponse[0].status == 'sold' ) {
+          // Branch to 'soldFirst'
+        }
+      }
+</code></pre>
+</article>
